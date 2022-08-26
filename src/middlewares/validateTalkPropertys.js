@@ -15,9 +15,11 @@ const validateValues = (watchedAt, rate, res, next) => {
 const validateTalkPropertys = (req, res, next) => {
   const { talk: { watchedAt, rate } } = req.body;
 
-  if (!watchedAt || !rate) {
-    return res.status(400).json({ message: !watchedAt ? 'O campo "watchedAt" é obrigatório' 
-    : 'O campo "rate" é obrigatório' });
+  if (!watchedAt) {
+    return res.status(400).json({ message: 'O campo "watchedAt" é obrigatório' });
+  }
+  if (!rate && rate !== 0) {
+    return res.status(400).json({ message: 'O campo "rate" é obrigatório' });
   }
 
   validateValues(watchedAt, rate, res, next);
