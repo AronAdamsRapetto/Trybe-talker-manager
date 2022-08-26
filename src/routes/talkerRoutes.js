@@ -36,7 +36,13 @@ async (req, res) => {
   res.status(201).json(addedTalker);
 });
 
-talkerRoutes.put('/:id', async (req, res) => {
+talkerRoutes.put('/:id',
+authUser,
+validateTalkerName,
+validateTalkerAge,
+validateTalk,
+validateTalkPropertys,
+async (req, res) => {
   const { id } = req.params;
   const { body } = req;
 
