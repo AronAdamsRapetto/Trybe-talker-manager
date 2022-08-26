@@ -56,10 +56,19 @@ const removeTalkerById = async (talkerId) => {
   await utils.writeDataFile(talkers);
 };
 
+const getTalkerByQuery = async (query) => {
+  const talkers = await utils.readDataFile();
+
+  const talkersByQuery = talkers.filter(({ name }) => name.includes(query));
+
+  return talkersByQuery;
+};
+
 module.exports = {
   getAllTalkers,
   getTalkerById,
   addTalker,
   updateTalkerById,
   removeTalkerById,
+  getTalkerByQuery,
 };

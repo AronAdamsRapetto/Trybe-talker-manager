@@ -8,6 +8,15 @@ const validateTalkPropertys = require('../middlewares/validateTalkPropertys');
 
 const talkerRoutes = Router();
 
+talkerRoutes.get('/search', authUser, async (req, res) => {
+  const { q } = req.query;
+  console.log(q);
+
+  const talkers = await talkerService.getTalkerByQuery(q);
+
+  res.status(200).json(talkers);
+});
+
 talkerRoutes.get('/', async (_req, res) => {
   const talkers = await talkerService.getAllTalkers();
 
