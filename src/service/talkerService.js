@@ -39,6 +39,10 @@ const updateTalkerById = async (talkerInfo, talkerId) => {
 
   const updatedTalker = talkers.find(({ id }) => id === Number(talkerId));
 
+  talkers.splice(talkers.findIndex(({ id }) => id === talkerId), 1, updatedTalker);
+
+  await utils.writeDataFile(talkers);
+
   return updatedTalker;
 };
 
