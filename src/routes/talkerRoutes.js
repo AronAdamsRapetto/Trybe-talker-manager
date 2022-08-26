@@ -51,4 +51,12 @@ async (req, res) => {
   res.status(200).json(updatedTalker);
 });
 
+talkerRoutes.delete('/:id', authUser, async (req, res) => {
+  const { id } = req.params;
+
+  await talkerService.removeTalkerById(id);
+
+  res.status(204).send();
+});
+
 module.exports = talkerRoutes;

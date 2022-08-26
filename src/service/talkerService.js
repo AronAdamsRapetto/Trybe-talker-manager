@@ -46,9 +46,20 @@ const updateTalkerById = async (talkerInfo, talkerId) => {
   return updatedTalker;
 };
 
+const removeTalkerById = async (talkerId) => {
+  const talkers = await utils.readDataFile();
+
+  const talkerToExclude = talkers.findIndex(({ id }) => id === talkerId);
+  
+  talkers.splice(talkerToExclude, 1);
+
+  await utils.writeDataFile(talkers);
+};
+
 module.exports = {
   getAllTalkers,
   getTalkerById,
   addTalker,
   updateTalkerById,
+  removeTalkerById,
 };
