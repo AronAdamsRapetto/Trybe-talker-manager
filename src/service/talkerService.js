@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 const { join } = require('path');
 
-const readDataFile = async (path) => {
+const readDataFile = async (path = '../talker.json') => {
   try {
     const talkers = await fs.readFile(join(__dirname, path), 'utf-8');
 
@@ -13,11 +13,18 @@ const readDataFile = async (path) => {
 };
 
 const getAllTalkers = async () => {
-  const path = '../talker.json';
-  const talker = await readDataFile(path);
+  const talkers = await readDataFile();
+  return talkers;
+};
+
+const getTalkerById = async (talkerId) => {
+  const talkers = await readDataFile();
+  const talker = talkers.find(({ id }) => id === Number(talkerId));
+
   return talker;
 };
 
 module.exports = {
   getAllTalkers,
+  getTalkerById,
 };
