@@ -36,4 +36,13 @@ async (req, res) => {
   res.status(201).json(addedTalker);
 });
 
+talkerRoutes.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
+
+  const updatedTalker = await talkerService.updateTalkerById(body, id);
+
+  res.status(200).json(updatedTalker);
+});
+
 module.exports = talkerRoutes;

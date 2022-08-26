@@ -25,8 +25,26 @@ const addTalker = async (talker) => {
   return newTalker;
 };
 
+const updateTalkerById = async (talkerInfo, talkerId) => {
+  const talkers = await utils.readDataFile();
+
+  talkers.forEach(({ id }, index) => {
+    if (id === Number(talkerId)) {
+      talkers[index] = {
+        id,
+        ...talkerInfo,
+      };
+    }
+  });
+
+  const updatedTalker = talkers.find(({ id }) => id === Number(talkerId));
+
+  return updatedTalker;
+};
+
 module.exports = {
   getAllTalkers,
   getTalkerById,
   addTalker,
+  updateTalkerById,
 };
